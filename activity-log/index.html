@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blue">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activity Log</title>
+  <meta name="description" content="Captures activities, experiences, and event-level execution in one place." />
+  <meta name="theme-color" content="#06101f" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="../icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="../icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div class="app">
+      <header class="hero card">
+        <div class="hero-top">
+          <div>
+            <div class="eyebrow">Execution System Lite</div>
+            <h1>Activity Log</h1>
+            <p class="subtitle">Captures activities, experiences, and event-level execution in one place.</p>
+          </div>
+          <button id="themeBtn" class="btn btn-secondary" type="button" aria-label="Toggle theme">Theme: Blue</button>
+        </div>
+
+        <div class="hero-pills">
+          <span class="pill">Actual actions taken</span>
+          <span class="pill">Chronological evidence trail</span>
+          <span class="pill">Local, fast, exportable</span>
+        </div>
+<nav class="top-nav" aria-label="Bundle navigation">
+  <a class="nav-chip" href="../index.html">Execution System Lite</a>
+  <a class="nav-chip active" href="index.html">Activity Log</a>
+  <a class="nav-chip" href="../task-board/index.html">Task Board</a>
+  <a class="nav-chip" href="../task-journal/index.html">Task Journal</a>
+</nav>
+      </header>
+
+      <section class="section-card card">
+        <div class="section-head section-head-stack">
+          <div>
+            <div class="eyebrow">Capture</div>
+            <h2>Log Activity</h2>
+            <p class="section-copy">Record what actually happened, not just what was planned.</p>
+          </div>
+        </div>
+
+        <form id="activityForm">
+          <div class="form-grid">
+            <div class="field">
+              <label for="dateInput">Date</label>
+              <input type="date" id="dateInput" required />
+            </div>
+
+            <div class="field">
+              <label for="timeInput">Time</label>
+              <input type="time" id="timeInput" />
+            </div>
+
+            <div class="field">
+              <label for="typeSelect">Type</label>
+              <select id="typeSelect">
+                <option value="">–</option>
+                <option value="task">Task</option>
+                <option value="activity">Activity</option>
+                <option value="experience">Experience</option>
+                <option value="meeting">Meeting</option>
+                <option value="errand">Errand</option>
+                <option value="workout">Workout</option>
+                <option value="admin">Admin</option>
+                <option value="travel">Travel</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="statusSelect">Status</label>
+              <select id="statusSelect">
+                <option value="completed">Completed</option>
+                <option value="partial">Partial</option>
+                <option value="planned">Planned</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="roleInput">Role</label>
+              <input type="text" id="roleInput" placeholder="Operator, solo, lead, attendee" />
+            </div>
+
+            <div class="field field-span-2">
+              <label for="titleInput">Activity / Event</label>
+              <input type="text" id="titleInput" placeholder="e.g., 45-minute swim, lender call, premarket review" required />
+            </div>
+
+            <div class="field">
+              <label for="locationInput">Location</label>
+              <input type="text" id="locationInput" placeholder="Home, pool, office, phone, online" />
+            </div>
+
+            <div class="field">
+              <label for="peopleInput">People</label>
+              <input type="text" id="peopleInput" placeholder="Names or none" />
+            </div>
+
+            <div class="field">
+              <label for="costInput">Cost</label>
+              <input type="number" id="costInput" min="0" step="0.01" placeholder="0.00" />
+            </div>
+
+            <div class="field">
+              <label for="ratingInput">Rating</label>
+              <select id="ratingInput">
+                <option value="">–</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+
+            <div class="field field-full">
+              <label for="tagsInput">Tags</label>
+              <input type="text" id="tagsInput" placeholder="#admin #health #deepwork #errand" />
+            </div>
+
+            <div class="field field-full">
+              <label for="notesInput">Notes</label>
+              <textarea id="notesInput" placeholder="Optional context, outcome, or significance."></textarea>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-primary" type="submit">Add Activity</button>
+            <button class="btn btn-secondary" type="button" id="exportCsvBtn">Export CSV</button>
+            <button class="btn btn-secondary" type="button" id="exportJsonBtn">Export JSON</button>
+            <button class="btn btn-danger" type="button" id="clearBtn">Clear All</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="metrics-grid">
+        <div class="metric-card metric-card-wide">
+          <div class="metric-label">Visible Entries</div>
+          <div class="metric-value" id="sumCount">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Completed</div>
+          <div class="metric-value" id="sumCompleted">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Planned</div>
+          <div class="metric-value" id="sumPlanned">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Avg Rating</div>
+          <div class="metric-value" id="sumRating">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Spend</div>
+          <div class="metric-value" id="sumCost">–</div>
+        </div>
+      </section>
+
+      <section class="section-card card table-section">
+        <div class="section-head section-head-stack">
+          <div>
+            <div class="eyebrow">Track</div>
+            <h2>Activity History</h2>
+            <p class="section-copy">Filter actual actions and review your event-level execution trail.</p>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-field">
+            <label for="filterType">Type</label>
+            <select id="filterType">
+              <option value="all">All</option>
+              <option value="task">Task</option>
+              <option value="activity">Activity</option>
+              <option value="experience">Experience</option>
+              <option value="meeting">Meeting</option>
+              <option value="errand">Errand</option>
+              <option value="workout">Workout</option>
+              <option value="admin">Admin</option>
+              <option value="travel">Travel</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus">
+              <option value="all">All</option>
+              <option value="completed">Completed</option>
+              <option value="partial">Partial</option>
+              <option value="planned">Planned</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label for="filterRating">Rating</label>
+            <select id="filterRating">
+              <option value="all">All</option>
+              <option value="rated">Rated only</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+
+          <div class="checkbox-wrap">
+            <label for="filterToday">Today only</label>
+            <input type="checkbox" id="filterToday" />
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Role</th>
+                <th>Activity</th>
+                <th>Location</th>
+                <th>People</th>
+                <th>Cost</th>
+                <th>Rating</th>
+                <th>Tags</th>
+                <th>Notes</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">Activity Log • Execution System Lite Companion</footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
