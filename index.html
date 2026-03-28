@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Task Board</title>
-  <meta name="description" content="Organizes tasks visually so execution state is visible at a glance." />
+  <title>Execution System Lite</title>
+  <meta name="description" content="Tracks tasks, actions, and execution flow in a lightweight operational system." />
   <meta name="theme-color" content="#06101f" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="../icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="../icons/icon-192.png" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,40 +17,91 @@
       <header class="hero card">
         <div class="hero-top">
           <div>
-            <div class="eyebrow">Execution System Lite</div>
-            <h1>Task Board</h1>
-            <p class="subtitle">Organizes tasks visually so execution state is visible at a glance.</p>
+            <div class="eyebrow">Execution System</div>
+            <h1>Execution System Lite</h1>
+            <p class="subtitle">Tracks tasks, actions, and execution flow in a lightweight operational system.</p>
           </div>
           <button id="themeBtn" class="btn btn-secondary" type="button" aria-label="Toggle theme">Theme: Blue</button>
         </div>
 
         <div class="hero-pills">
-          <span class="pill">Visual execution layer</span>
-          <span class="pill">Board-state clarity</span>
+          <span class="pill">Task tracking core</span>
+          <span class="pill">Capture, track, review</span>
           <span class="pill">Local, fast, exportable</span>
         </div>
 <nav class="top-nav" aria-label="Bundle navigation">
-  <a class="nav-chip" href="../index.html">Execution System Lite</a>
-  <a class="nav-chip" href="../activity-log/index.html">Activity Log</a>
-  <a class="nav-chip active" href="index.html">Task Board</a>
-  <a class="nav-chip" href="../task-journal/index.html">Task Journal</a>
+  <a class="nav-chip active" href="index.html">Execution System Lite</a>
+  <a class="nav-chip" href="activity-log/index.html">Activity Log</a>
+  <a class="nav-chip" href="task-board/index.html">Task Board</a>
+  <a class="nav-chip" href="task-journal/index.html">Task Journal</a>
 </nav>
       </header>
 
       <section class="section-card card">
         <div class="section-head section-head-stack">
           <div>
-            <div class="eyebrow">Capture</div>
-            <h2>Add Board Task</h2>
-            <p class="section-copy">Create a task and place it directly into the visual execution flow.</p>
+            <div class="eyebrow">System View</div>
+            <h2>How Bundle 3 Fits Together</h2>
+            <p class="section-copy">Execution System Lite is the flagship. It absorbs the task-tracking engine and anchors the bundle.</p>
           </div>
         </div>
 
-        <form id="boardForm">
+        <div class="system-grid">
+          <article class="system-tile system-tile-primary">
+            <div class="system-kicker">Flagship</div>
+            <h3>Execution System Lite</h3>
+            <p>The main operational tracker for tasks, status, progress, and execution review.</p>
+            <ul class="system-list">
+              <li>Quick capture</li>
+              <li>Status tracking</li>
+              <li>Filters and review metrics</li>
+            </ul>
+          </article>
+
+          <article class="system-tile">
+            <div class="system-kicker">Supporting App</div>
+            <h3>Activity Log</h3>
+            <p>Captures what actually happened across actions, events, and experiences.</p>
+          </article>
+
+          <article class="system-tile">
+            <div class="system-kicker">Supporting App</div>
+            <h3>Task Board</h3>
+            <p>Provides a visual organization layer when you want a board-style execution view.</p>
+          </article>
+
+          <article class="system-tile">
+            <div class="system-kicker">Supporting App</div>
+            <h3>Task Journal</h3>
+            <p>Supports review, context, and narrative reflection around how execution unfolded.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card card">
+        <div class="section-head section-head-stack">
+          <div>
+            <div class="eyebrow">Capture</div>
+            <h2>Quick Entry</h2>
+            <p class="section-copy">Log a task in seconds without turning this into project management software.</p>
+          </div>
+        </div>
+
+        <form id="taskForm">
           <div class="form-grid">
             <div class="field">
               <label for="dateInput">Date</label>
               <input type="date" id="dateInput" required />
+            </div>
+
+            <div class="field">
+              <label for="startTimeInput">Start time</label>
+              <input type="time" id="startTimeInput" />
+            </div>
+
+            <div class="field">
+              <label for="endTimeInput">Stop time</label>
+              <input type="time" id="endTimeInput" />
             </div>
 
             <div class="field">
@@ -83,23 +134,24 @@
             </div>
 
             <div class="field">
-              <label for="statusSelect">Board Column</label>
+              <label for="statusSelect">Status</label>
               <select id="statusSelect">
-                <option value="not_started">Not Started</option>
-                <option value="in_progress">In Progress</option>
-                <option value="blocked">Blocked</option>
+                <option value="not_started">Not started</option>
+                <option value="in_progress">In progress</option>
                 <option value="done">Done</option>
+                <option value="blocked">Blocked</option>
+                <option value="deferred">Deferred</option>
               </select>
             </div>
 
             <div class="field field-span-2">
-              <label for="titleInput">Task</label>
-              <input type="text" id="titleInput" placeholder="e.g., Finish outreach draft, review tracker, plan errands" required />
+              <label for="taskNameInput">Task / Activity</label>
+              <input type="text" id="taskNameInput" placeholder="e.g., Review scoring logic, call lender, workout" required />
             </div>
 
             <div class="field field-span-2">
               <label for="tagsInput">Tags</label>
-              <input type="text" id="tagsInput" placeholder="#deepwork #quickwin #admin #errand" />
+              <input type="text" id="tagsInput" placeholder="#deepwork #quickwin #admin #health" />
             </div>
 
             <div class="field field-full">
@@ -109,28 +161,33 @@
           </div>
 
           <div class="action-row">
-            <button class="btn btn-primary" type="submit">Add Card</button>
-            <button class="btn btn-secondary" type="button" id="exportCsvBtn">Export CSV</button>
-            <button class="btn btn-secondary" type="button" id="exportJsonBtn">Export JSON</button>
-            <button class="btn btn-danger" type="button" id="clearBtn">Clear All</button>
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+            <button type="button" class="btn btn-secondary" id="exportBtn">Export CSV</button>
+            <button type="button" class="btn btn-secondary" id="exportJsonBtn">Export JSON</button>
+            <button type="button" class="btn btn-danger" id="clearBtn">Clear All</button>
           </div>
         </form>
       </section>
 
       <section class="metrics-grid">
         <div class="metric-card metric-card-wide">
-          <div class="metric-label">Visible Cards</div>
+          <div class="metric-label">Visible Tasks</div>
           <div class="metric-value" id="sumCount">0</div>
         </div>
 
         <div class="metric-card">
-          <div class="metric-label">Not Started</div>
-          <div class="metric-value" id="sumNotStarted">–</div>
+          <div class="metric-label">Completed</div>
+          <div class="metric-value" id="sumCompleted">–</div>
         </div>
 
         <div class="metric-card">
-          <div class="metric-label">In Progress</div>
-          <div class="metric-value" id="sumInProgress">–</div>
+          <div class="metric-label">Completion %</div>
+          <div class="metric-value" id="sumCompletionPct">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Active</div>
+          <div class="metric-value" id="sumActive">–</div>
         </div>
 
         <div class="metric-card">
@@ -139,17 +196,27 @@
         </div>
 
         <div class="metric-card">
-          <div class="metric-label">Done</div>
-          <div class="metric-value" id="sumDone">–</div>
+          <div class="metric-label">Overdue</div>
+          <div class="metric-value" id="sumOverdue">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Planned vs Completed</div>
+          <div class="metric-value" id="sumPlannedVsCompleted">–</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Avg Priority</div>
+          <div class="metric-value" id="sumAvgPrio">–</div>
         </div>
       </section>
 
-      <section class="section-card card">
+      <section class="section-card card table-section">
         <div class="section-head section-head-stack">
           <div>
-            <div class="eyebrow">Filter</div>
-            <h2>Board Filters</h2>
-            <p class="section-copy">Focus the board by category, priority, or date.</p>
+            <div class="eyebrow">Track</div>
+            <h2>Current Entries</h2>
+            <p class="section-copy">Filter state, review progress, and update execution status inline.</p>
           </div>
         </div>
 
@@ -173,6 +240,18 @@
           </div>
 
           <div class="filter-field">
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus">
+              <option value="all">All</option>
+              <option value="not_started">Not started</option>
+              <option value="in_progress">In progress</option>
+              <option value="done">Done</option>
+              <option value="blocked">Blocked</option>
+              <option value="deferred">Deferred</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
             <label for="filterPriority">Priority</label>
             <select id="filterPriority">
               <option value="all">All</option>
@@ -188,43 +267,30 @@
             <input type="checkbox" id="filterToday" />
           </div>
         </div>
-      </section>
 
-      <section class="board-grid">
-        <div class="board-column card">
-          <div class="board-column-head">
-            <h3>Not Started</h3>
-            <span class="board-count" id="countNotStarted">0</span>
-          </div>
-          <div class="board-stack" id="colNotStarted"></div>
-        </div>
-
-        <div class="board-column card">
-          <div class="board-column-head">
-            <h3>In Progress</h3>
-            <span class="board-count" id="countInProgress">0</span>
-          </div>
-          <div class="board-stack" id="colInProgress"></div>
-        </div>
-
-        <div class="board-column card">
-          <div class="board-column-head">
-            <h3>Blocked</h3>
-            <span class="board-count" id="countBlocked">0</span>
-          </div>
-          <div class="board-stack" id="colBlocked"></div>
-        </div>
-
-        <div class="board-column card">
-          <div class="board-column-head">
-            <h3>Done</h3>
-            <span class="board-count" id="countDone">0</span>
-          </div>
-          <div class="board-stack" id="colDone"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Start</th>
+                <th>Stop</th>
+                <th>Category</th>
+                <th>Task</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Time</th>
+                <th>Tags</th>
+                <th>Notes</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
         </div>
       </section>
 
-      <footer class="footer">Task Board • Execution System Lite Companion</footer>
+      <footer class="footer">Execution System Lite • Operational Tracker</footer>
     </div>
   </div>
 
